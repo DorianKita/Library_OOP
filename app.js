@@ -10,7 +10,7 @@ class Book{
     }
 
     showBook(){
-        console.log(`Title: ${this.#title} , Author: ${this.#author}, Release date: ${this.#publishYear} `);
+        return (`Title: ${this.#title} , Author: ${this.#author}, Release date: ${this.#publishYear} `);
     }
 }
 
@@ -25,10 +25,11 @@ class Library{
     }
 
     init(){
-        document.getElementById('add-book').addEventListener('click', () => this.addBook());
+        document.getElementById('add-book').addEventListener('click', () => this.#addBook());
+        document.getElementById('search-book').addEventListener('click', () => this.#searchBook());
     }
 
-    addBook(){
+    #addBook(){
         const title = document.getElementById('title').value;
         const author = document.getElementById('author').value;
         const date = document.getElementById('date').value;
@@ -38,6 +39,19 @@ class Library{
 
         alert('Book has been added to library collection');
         console.log(this.#bookCollection);
+    }
+
+    #searchBook(){
+        const title = document.getElementById('search-title').value;
+        const book = this.#bookCollection.get(title);
+        const displayBook = document.getElementById('search-result');
+
+        if(book){
+            // displayBook.textContent = book.showBook();
+            console.log(book);
+        } else {
+            displayBook.textContent = 'this book does not exist in library';
+        }
     }
 }
 const library = new Library();
